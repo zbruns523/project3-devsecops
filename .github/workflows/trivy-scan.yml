@@ -1,0 +1,24 @@
+name: Container Security Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Build Docker image
+      run: docker build -t devsecops-demo:ci .
+
+    - name: Run Trivy vulnerability scan
+      uses: aquasecurity/trivy-action@0.12.0
+      with:
+        image-ref: devsecops-demo:ci
+        severity: HIGH,CRITICAL
+        exit-code: 0
