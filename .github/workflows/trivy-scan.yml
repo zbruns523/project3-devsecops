@@ -21,4 +21,4 @@ jobs:
       with:
         image-ref: devsecops-demo:ci
         severity: HIGH,CRITICAL
-        exit-code: 0
+        exit-code: 1
